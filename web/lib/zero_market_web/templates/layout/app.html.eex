@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Marketplace</title>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="inner">
+        <nav class="pure-menu pure-menu-horizontal" role="navigation">
+          <%= link 'Zero', to: page_path(@conn, :index), class: 'pure-menu-heading pure-menu-link' %>
+          <ul class="pure-menu-list">
+            <%= if @current_user do %>
+              <li class="pure-menu-item">
+                <%= link 'Sign Out', to: session_path(@conn, :delete), class: 'pure-menu-link' %>
+              </li>
+              <li class="pure-menu-item">
+                <%= link @current_user.username, to: user_path(@conn, :show, @current_user), class: "pure-menu-link" %>
+              </li>
+            <% else %>
+              <li class="pure-menu-item">
+                <%= link 'Sign In', to: session_path(@conn, :new), class: 'pure-menu-link' %>
+              </li>
+              <li class="pure-menu-item">
+                <%= link 'Sign Up', to: user_path(@conn, :new), class: 'pure-menu-link' %>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>  
+    </header>
+
+    <div class="inner">
+      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+      <main role="main">
+        <%= render @view_module, @view_template, assigns %>
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,9 @@
+.npm
+docker-compose.*.yml
+web/.npm
+web/.hex
+web/.mix
+web/.ash_history
+web/_build
+web/deps
+web/assets/node_modules
